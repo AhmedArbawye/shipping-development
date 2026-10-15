@@ -1,0 +1,78 @@
+<button onclick="showNotice()"> رفض الدفع </button>
+
+<div id="paymentNotice" hidden dir="rtl">
+  <div>🙏</div>
+  <h2>نعتذر، تم رفض الدفع</h2>
+  <p>إذا واجهت مشكلة بالدفع، تواصل مع خدمة العملاء على واتساب.</p>
+  <a id="whatsappLink" target="_blank" rel="noopener noreferrer">
+    تواصل معنا على واتساب
+  </a>
+</div>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 30px;
+    background: #f8f3f1;
+  }
+
+  button, #paymentNotice a {
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 18px;
+    cursor: pointer;
+  }
+
+  button {
+    background: #6b514a;
+    color: white;
+  }
+
+  #paymentNotice {
+    max-width: 380px;
+    margin: 24px auto;
+    padding: 22px;
+    color: #493a37;
+    background: #ead4cc;
+    border-radius: 18px;
+    animation: appear .4s ease-out;
+  }
+
+  #paymentNotice[hidden] {
+    display: none;
+  }
+
+  #paymentNotice div {
+    font-size: 36px;
+    animation: sorry 1.5s ease-in-out infinite;
+  }
+
+  #paymentNotice a {
+    display: inline-block;
+    margin-top: 10px;
+    color: white;
+    background: #218c68;
+    text-decoration: none;
+  }
+
+  @keyframes appear {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes sorry {
+    50% { transform: translateY(-5px) rotate(-8deg); }
+  }
+</style>
+
+<script>
+  // استبدل الرقم برقم خدمة العملاء، بصيغة دولية وبدون علامة +.
+  document.getElementById("whatsappLink").href =
+    "https://wa.me/9665XXXXXXXX?text=" +
+    encodeURIComponent("مرحباً، أحتاج مساعدة بخصوص الدفع.");
+
+  function showNotice() {
+    document.getElementById("paymentNotice").hidden = false;
+  }
+</script>

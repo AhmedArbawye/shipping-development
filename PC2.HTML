@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>عالم وافي | تجميعات PC</title>
+
+<style>
+:root {
+  --blue: #07559b;
+  --cyan: #079dc2;
+  --line: #e1e5e9;
+  --text: #303b48;
+  --muted: #87909b;
+  --bg: #fafafa;
+}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: Tahoma, Arial, sans-serif;
+  background: white;
+}
+button, select { font: inherit; }
+button { cursor: pointer; }
+
+[hidden] { display: none !important; }
+
+/* HEADER: visual inspired by Wafi */
+.top-header {
+  min-height: 96px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid #eee;
+  background: white;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--blue);
+  font-size: 24px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.logo-symbol {
+  font-size: 35px;
+  color: var(--blue);
+}
+.search {
+  flex: 1;
+  min-width: 100px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #66717d;
+  font-size: 13px;
+}
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.tool {
+  padding: 13px;
+  border-radius: 10px;
+  background: #f5f6f8;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.promo-nav {
+  min-height: 72px;
+  background: var(--blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 24px;
+}
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.nav-pill {
+  border-radius: 28px;
+  background: #f0f7ff;
+  color: #183247;
+  padding: 12px 17px;
+  font-size: 14px;
+}
+.nav-pill:first-child {
+  background: var(--cyan);
+  color: white;
+  font-weight: bold;
+}
+.promo-text {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* CATEGORY PAGE */
+.category-page {
+  min-height: 75vh;
+  background: var(--bg);
+  padding-bottom: 50px;
+}
+.category-inner {
+  max-width: 1650px;
+  margin: auto;
+  padding: 32px 7.3%;
+}
+.breadcrumb {
+  color: #9299a2;
+  font-size: 14px;
+  margin-bottom: 65px;
+}
+.breadcrumb span { color: var(--blue); }
+
+.category-title {
+  display: table;
+  margin: 0 0 36px auto;
+  padding-bottom: 9px;
+  border-bottom: 4px solid var(--blue);
+  color: #68798a;
+  font-size: 30px;
+  font-weight: normal;
+}
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 18px;
+}
+.category-card {
+  width: 178px;
+  min-height: 195px;
+  border: 1px solid #2878df;
+  border-radius: 12px;
+  background: #f8f2ee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  color: #4d5661;
+  transition: box-shadow .2s, transform .2s;
+}
+.category-card:hover {
+  box-shadow: 0 7px 20px #0a4e8517;
+  transform: translateY(-2px);
+}
+.category-card.laptops { background: #eef2fa; }
+.category-card.monitors { background: #e9f7ef; }
+.category-card .picture {
+  height: 74px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 49px;
+}
+.category-card .caption {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+}
+.category-card .hint {
+  color: var(--blue);
+  font-size: 11px;
+  margin-top: -8px;
+}
+
+/* PRODUCT LIST PREVIEW */
+.product-section {
+  margin-top: 45px;
+}
+.product-section h2 {
+  font-size: 23px;
+  font-weight: normal;
+  color: #7e8a98;
+}
+.product-preview {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.product-preview h3 { font-size: 15px; line-height: 1.8; }
+.product-preview p { color: var(--blue); font-weight: bold; }
+.blue-btn {
+  border: 0;
+  background: var(--blue);
+  color: white;
+  border-radius: 8px;
+  padding: 13px 20px;
+}
+
+/* BUILDER PAGE */
+.builder-page {
+  min-height: 100vh;
+  padding: 25px max(18px, calc((100% - 1150px)/2));
+  background: #fff;
+}
+.back-btn {
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--blue);
+  border-radius: 8px;
+  padding: 11px 15px;
+  margin-bottom: 24px;
+}
+.builder-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+.builder-heading h1 { font-size: 25px; margin: 0 0 10px; }
+.builder-heading p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin: 0;
+}
+.base-price {
+  font-size: 24px;
+  color: var(--blue);
+  font-weight: bold;
+}
+.base-price small {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.builder-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 24px;
+  align-items: start;
+}
+.builder-title { font-size: 18px; margin: 0 0 15px; }
+.parts { display: grid; gap: 12px; }
+.part {
+  display: grid;
+  grid-template-columns: 42px minmax(0,1fr);
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 15px;
+}
+.part-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 9px;
+  background: #edf5ff;
+  font-size: 21px;
+}
+.part label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 2px 0 9px;
+}
+.part select {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  background: white;
+  color: var(--text);
+  border: 1px solid #dce2ea;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.part select:focus {
+  outline: 1px solid var(--blue);
+  border-color: var(--blue);
+}
+.part-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.delta { color: #21814c; font-weight: bold; }
+.delta.negative { color: #c04444; }
+.delta.neutral { color: var(--muted); }
+
+.summary {
+  position: sticky;
+  top: 15px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #f8fafc;
+}
+.summary h2 { font-size: 18px; margin: 0 0 7px; }
+.summary-sub { font-size: 12px; color: var(--muted); margin-bottom: 15px; }
+.summary-item {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+}
+.summary-item strong { display: block; font-size: 12px; margin-bottom: 5px; }
+.summary-item span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  padding: 17px 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+.total-row strong { font-size: 20px; color: var(--blue); white-space: nowrap; }
+.disclaimer {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+.full-btn {
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--blue);
+  color: white;
+  font-weight: bold;
+}
+.reset-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+}
+.message {
+  display: none;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 8px;
+  background: #eaf7ee;
+  color: #206b38;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+@media(max-width: 800px) {
+  .top-header { flex-wrap: wrap; padding: 14px; }
+  .logo { font-size: 20px; }
+  .search { order: 3; flex-basis: 100%; }
+  .header-tools { margin-inline-start: auto; }
+  .tool.delivery { display: none; }
+  .promo-nav { padding: 12px; }
+  .promo-text { display: none; }
+  .nav-pills { gap: 7px; }
+  .nav-pill { padding: 9px 12px; font-size: 12px; }
+  .category-inner { padding: 25px 15px; }
+  .breadcrumb { margin-bottom: 40px; font-size: 12px; }
+  .category-title { font-size: 23px; }
+  .category-grid { gap: 10px; }
+  .category-card { width: calc(33.333% - 7px); min-height: 155px; padding: 9px; }
+  .category-card .picture { height: 55px; font-size: 35px; }
+  .category-card .caption { font-size: 12px; }
+  .builder-layout { grid-template-columns: 1fr; }
+  .summary { position: static; }
+}
+@media(max-width: 430px) {
+  .category-card { width: calc(50% - 5px); }
+  .builder-page { padding: 16px 12px; }
+  .builder-heading h1 { font-size: 21px; }
+  .part { grid-template-columns: 35px minmax(0,1fr); padding: 11px; gap: 9px; }
+  .part-icon { width: 35px; height: 35px; font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- شريط المتجر -->
+<header class="top-header">
+  <div class="logo">
+    <span class="logo-symbol">W</span>
+    <span>عالم وافي</span>
+  </div>
+
+  <div class="search">
+    <span>⌕</span>
+    <span>ابحث هنا....</span>
+  </div>
+
+  <div class="header-tools">
+    <div class="tool">♡</div>
+    <div class="tool">♧</div>
+    <div class="tool">السلة　♙</div>
+    <div class="tool delivery">التوصيل إلى المنزل</div>
+    <div class="tool">AR⌄</div>
+  </div>
+</header>
+
+<nav class="promo-nav">
+  <div class="nav-pills">
+    <span class="nav-pill">▦ التصنيفات</span>
+    <span class="nav-pill">آيفون 18</span>
+    <span class="nav-pill">آيفون 17</span>
+    <span class="nav-pill">سعر مميز</span>
+    <span class="nav-pill">الهواتف الذكية</span>
+  </div>
+  <div class="promo-text">
+    شحن مجاني للطلبات فوق 299 ر.س |
+    <u>قسط جهازك حتى 60 شهر</u>
+  </div>
+</nav>
+
+<!-- الصفحة الأولى: التصنيف الأصلي -->
+<section class="category-page" id="categoryPage">
+  <div class="category-inner">
+
+    <div class="breadcrumb">
+      الرئيسية　‹　التصنيف　‹　<span>اللابتوبات والتجميعات</span>
+    </div>
+
+    <h1 class="category-title">تسوق بالتصنيف الفرعي</h1>
+
+    <div class="category-grid">
+
+      <button class="category-card laptops" type="button">
+        <div class="picture">💻</div>
+        <span class="caption">أجهزة الكمبيوتر المحمولة</span>
+      </button>
+
+      <button class="category-card" id="openBuilder" type="button">
+        <div class="picture">🖥️</div>
+        <span class="caption">تجميعات الـ PC</span>
+        <span class="hint">خصص تجميعتك ←</span>
+      </button>
+
+      <button class="category-card monitors" type="button">
+        <div class="picture">🖥️</div>
+        <span class="caption">شاشات الكمبيوتر</span>
+      </button>
+
+    </div>
+
+    <section class="product-section">
+      <h2>المنتجات (38)</h2>
+      <div class="product-preview">
+        <div>
+          <h3>تجميعة بي سي قيمنق RTX 5070 Ti</h3>
+          <p>12,999 ر.س</p>
+        </div>
+        <button class="blue-btn" id="openProduct">عرض التجميعة</button>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<!-- الصفحة الثانية: تخصيص التجميعة -->
+<main class="builder-page" id="builderPage" hidden>
+
+  <button class="back-btn" id="backToCategories">→ العودة إلى التصنيفات</button>
+
+  <header class="builder-heading">
+    <div>
+      <h1>تجميعة بي سي قيمنق RTX 5070 Ti</h1>
+      <p>
+        خصص مكونات جهازك واختر القطع المناسبة لك.<br>
+        تجميعة عالم وافي — نموذج تفاعلي لتجربة الشراء.
+      </p>
+    </div>
+    <div class="base-price">
+      12,999 ر.س
+      <small>سعر التجميعة الأساسي شامل الضريبة</small>
+    </div>
+  </header>
+
+  <div class="builder-layout">
+    <section>
+      <h2 class="builder-title">اختر مكونات التجميعة</h2>
+      <div class="parts">
+
+        <div class="part">
+          <div class="part-icon">🎮</div>
+          <div>
+            <label for="gpu">كرت الشاشة Graphics Card</label>
+            <select id="gpu">
+              <option value="gpu5070ti">NVIDIA RTX 5070 Ti 16GB</option>
+              <option value="gpu5070">NVIDIA RTX 5070 12GB</option>
+              <option value="gpu5080">NVIDIA RTX 5080 16GB</option>
+              <option value="gpu5060ti">NVIDIA RTX 5060 Ti 16GB</option>
+            </select>
+            <div class="part-meta"><span>كرت الشاشة</span><span id="delta-gpu" class="delta neutral"></span></div>
+          </div>
+        </div>
+
+        <div class="part">
+          <div class="part-icon">⚙️</div>
+          <div>
+            <label for="cpu">المعالج Processor</label>
+            <select id="cpu">
+              <option value="i714700f">Intel Core i7-14700F</option>
+              <option value="i514600kf">Intel Core i5-14600KF</option>
+              <option value="i914900f">Intel Core i9-14900F</option>
+            </select>
+            <div class="part-meta"><span>المعالج</span><span id="delta-cpu" class="delta neutral"></span></div>
+          </div>
+        </div>
+
+        <div class="part">
+          <div class="part-icon">▦</div>
+          <div>
+            <label for="motherboard">اللوحة الأم Motherboard</label>
+            <select id="motherboard">
+              <option value="b760">B760 WIFI + Bluetooth</option>
+              <option value="b760gaming">B760 Gaming WIFI</option>
+              <option value="z790">Z790 WIFI + Bluetooth</option>
+            </select>
+            <div class="part-meta"><span>اللوحة الأم</span><span id="delta-motherboard" class="delta neutral"></span></div>
+          </div>
+        </div>
+
+        <div class="part">
+          <div class="part-icon">💡</div>
+          <div>
+            <label for="ram">الذاكرة العشوائية RAM</label>
+            <select id="ram">
+              <option value="ram32rgb">32GB DDR5 RGB</option>
+              <option value="ram32">32GB DDR5 بدون RGB</option>
+              <option value="ram64">64GB DDR5 RGB</option>
+            </select>
+            <div class="part-meta"><span>الذاكرة</span><span id="delta-ram" class="delta neutral"></span></div>
+          </div>
+        </div>
+
+        <div class="part">
+          <div class="part-icon">💾</div>
+          <div>
+            <label for="storage">التخزين الداخلي Storage</label>
+            <select id="storage">
+              <option value="ssd1">1TB M.2 NVMe SSD</option>
+              <option value="ssd2">2TB M.2 NVMe SSD</option>
+              <option value="ssd4">4TB M.2 NVMe SSD</option>
+            </select>
+            <div class="part-meta"><span>التخزين</span><span id="delta-storage" class="delta neutral"></span></div>
+          </div>
+        </div>
+
+        <div class="part">
+          <div class="part-icon">❄️</div>
+          <div>
+            <label for="cooler">التبريد Cooling</label>
+            <select id="cooler">
+              <option value="liquid360">Liquid Cooler 360mm</option>
+              <option value="liquid240">Liquid Cooler 240mm</option>
+              <option value="aircooler">Air Cooler عالي الأداء</option>
+            </select>
+            <div class="part-meta"><span>التبريد</span><span id="delta-cooler" class="delta neutral"></span></div>
+          </div>
+        </div>
+
+        <div class="part">
+          <div class="part-icon">🔌</div>
+          <div>
+            <label for="psu">مزود الطاقة Power Supply</label>
+            <select id="psu">
+              <option value="psu1000">1000W</option>
+              <option value="psu850">850W 80+ Gold</option>
+              <option value="psu1200">1200W 80+ Gold</option>
+            </select>
+            <div class="part-meta"><span>مزود الطاقة</span><span id="delta-psu" class="delta neutral"></span></div>
+          </div>
+        </div>
+
+        <div class="part">
+          <div class="part-icon">🖥️</div>
+          <div>
+            <label for="monitor">الشاشة Monitor</label>
+            <select id="monitor">
+              <option value="none">بدون شاشة</option>
+              <option value="monitor24">24 بوصة FHD 180Hz</option>
+              <option value="monitor27">27 بوصة QHD 165Hz</option>
+              <option value="monitor32">32 بوصة 4K 144Hz</option>
+              <option value="monitoroled">27 بوصة OLED 240Hz</option>
+            </select>
+            <div class="part-meta"><span>الشاشة اختيارية</span><span id="delta-monitor" class="delta neutral"></span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <aside class="summary">
+      <h2>ملخص التجميعة</h2>
+      <div class="summary-sub">المواصفات المختارة</div>
+      <div id="summaryItems"></div>
+
+      <div class="total-row">
+        <span>الإجمالي التقديري</span>
+        <strong id="total">12,999 ر.س</strong>
+      </div>
+
+      <div class="disclaimer">
+        سعر المنتج الأساسي 12,999 ر.س. فروق الأسعار للخيارات البديلة
+        تجريبية لأغراض العرض، ويجب استبدالها بالأسعار المعتمدة من المتجر.
+      </div>
+
+      <button class="full-btn" id="addCart">أضف التجميعة للسلة</button>
+      <button class="reset-btn" id="resetBuilder">إعادة الاختيارات الأساسية</button>
+      <div class="message" id="message" role="status"></div>
+    </aside>
+  </div>
+</main>
+
+<script>
+const categoryPage = document.getElementById("categoryPage");
+const builderPage = document.getElementById("builderPage");
+
+function showBuilder() {
+  categoryPage.hidden = true;
+  builderPage.hidden = false;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showCategories() {
+  builderPage.hidden = true;
+  categoryPage.hidden = false;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.getElementById("openBuilder").addEventListener("click", showBuilder);
+document.getElementById("openProduct").addEventListener("click", showBuilder);
+document.getElementById("backToCategories").addEventListener("click", showCategories);
+
+const BASE_PRICE = 12999;
+
+const catalog = {
+  gpu: {
+    gpu5070ti: { name: "NVIDIA RTX 5070 Ti 16GB", delta: 0 },
+    gpu5070: { name: "NVIDIA RTX 5070 12GB", delta: -1200 },
+    gpu5080: { name: "NVIDIA RTX 5080 16GB", delta: 1800 },
+    gpu5060ti: { name: "NVIDIA RTX 5060 Ti 16GB", delta: -1900 }
+  },
+  cpu: {
+    i714700f: { name: "Intel Core i7-14700F", delta: 0 },
+    i514600kf: { name: "Intel Core i5-14600KF", delta: -350 },
+    i914900f: { name: "Intel Core i9-14900F", delta: 800 }
+  },
+  motherboard: {
+    b760: { name: "B760 WIFI + Bluetooth", delta: 0 },
+    b760gaming: { name: "B760 Gaming WIFI", delta: 250 },
+    z790: { name: "Z790 WIFI + Bluetooth", delta: 600 }
+  },
+  ram: {
+    ram32rgb: { name: "32GB DDR5 RGB", delta: 0 },
+    ram32: { name: "32GB DDR5 بدون RGB", delta: -100 },
+    ram64: { name: "64GB DDR5 RGB", delta: 450 }
+  },
+  storage: {
+    ssd1: { name: "1TB M.2 NVMe SSD", delta: 0 },
+    ssd2: { name: "2TB M.2 NVMe SSD", delta: 300 },
+    ssd4: { name: "4TB M.2 NVMe SSD", delta: 800 }
+  },
+  cooler: {
+    liquid360: { name: "Liquid Cooler 360mm", delta: 0 },
+    liquid240: { name: "Liquid Cooler 240mm", delta: -200 },
+    aircooler: { name: "Air Cooler", delta: -400 }
+  },
+  psu: {
+    psu1000: { name: "1000W", delta: 0 },
+    psu850: { name: "850W 80+ Gold", delta: -150 },
+    psu1200: { name: "1200W 80+ Gold", delta: 250 }
+  },
+  monitor: {
+    none: { name: "بدون شاشة", delta: 0 },
+    monitor24: { name: "24 بوصة FHD 180Hz", delta: 450 },
+    monitor27: { name: "27 بوصة QHD 165Hz", delta: 900 },
+    monitor32: { name: "32 بوصة 4K 144Hz", delta: 1600 },
+    monitoroled: { name: "27 بوصة OLED 240Hz", delta: 2800 }
+  }
+};
+
+const components = [
+  { id: "gpu", label: "كرت الشاشة" },
+  { id: "cpu", label: "المعالج" },
+  { id: "motherboard", label: "اللوحة الأم" },
+  { id: "ram", label: "الذاكرة العشوائية" },
+  { id: "storage", label: "التخزين الداخلي" },
+  { id: "cooler", label: "التبريد" },
+  { id: "psu", label: "مزود الطاقة" },
+  { id: "monitor", label: "الشاشة" }
+];
+
+const fmt = value =>
+  new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(value) + " ر.س";
+
+function getItem(id) {
+  return catalog[id][document.getElementById(id).value];
+}
+
+function updateBuilder() {
+  let total = BASE_PRICE;
+  const summary = document.getElementById("summaryItems");
+  summary.replaceChildren();
+
+  components.forEach(component => {
+    const item = getItem(component.id);
+    total += item.delta;
+
+    const delta = document.getElementById("delta-" + component.id);
+    if (item.delta === 0) {
+      delta.textContent = component.id === "monitor" ? "اختياري" : "أساسي";
+      delta.className = "delta neutral";
+    } else {
+      delta.textContent = (item.delta > 0 ? "+" : "−") + fmt(Math.abs(item.delta));
+      delta.className = "delta " + (item.delta < 0 ? "negative" : "");
+    }
+
+    const row = document.createElement("div");
+    row.className = "summary-item";
+    const title = document.createElement("strong");
+    title.textContent = component.label;
+    const value = document.createElement("span");
+    value.textContent = item.name;
+    row.append(title, value);
+    summary.appendChild(row);
+  });
+
+  document.getElementById("total").textContent = fmt(total);
+  document.getElementById("message").style.display = "none";
+}
+
+components.forEach(component => {
+  document.getElementById(component.id)
+    .addEventListener("change", updateBuilder);
+});
+
+document.getElementById("resetBuilder").addEventListener("click", () => {
+  components.forEach(component => {
+    document.getElementById(component.id).selectedIndex = 0;
+  });
+  updateBuilder();
+});
+
+document.getElementById("addCart").addEventListener("click", () => {
+  const total = BASE_PRICE +
+    components.reduce((sum, component) => sum + getItem(component.id).delta, 0);
+
+  const message = document.getElementById("message");
+  message.textContent =
+    "تم تجهيز ملخص التجميعة. الإجمالي التقديري " + fmt(total) +
+    ". زر السلة يحتاج ربطًا بنظام المتجر لإضافة المنتجات فعليًا.";
+  message.style.display = "block";
+  console.log("PC build:", components.map(c => ({
+    component: c.label,
+    product: getItem(c.id).name
+  })), "Total:", total);
+});
+
+updateBuilder();
+</script>
+</body>
+</html>
